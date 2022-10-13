@@ -952,83 +952,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 333981741}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &352094819 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-    type: 3}
-  m_PrefabInstance: {fileID: 376085187}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &376085187
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 2
-    m_TransformParent: {fileID: 833775570}
-    m_Modifications:
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 24.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.4300001
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 18.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7193734
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.69462365
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -87.994
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3216817619400661703, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_Name
-      value: Pipe Ramp 1x5 0.5 Z
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_AddedGameObjects: []
-  m_SourcePrefab: {fileID: 100100000, guid: 06c63483157e7104b8da8ad3ee1ab8f1, type: 3}
 --- !u!4 &379742143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5275677908726199334, guid: 7e2f634251dd98e46b5698c49595e488,
@@ -2111,7 +2034,6 @@ Transform:
   - {fileID: 284004648}
   - {fileID: 1745075128}
   - {fileID: 800457437}
-  - {fileID: 845020041}
   - {fileID: 146827455}
   - {fileID: 1179660435}
   - {fileID: 1558191252}
@@ -2126,7 +2048,6 @@ Transform:
   - {fileID: 1953398369}
   - {fileID: 1729342454}
   - {fileID: 191849739}
-  - {fileID: 352094819}
   - {fileID: 259493111}
   - {fileID: 380950253}
   - {fileID: 1506815235}
@@ -2135,12 +2056,6 @@ Transform:
   m_Father: {fileID: 1372798567}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &845020041 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1602809900}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &902980026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3872,77 +3787,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 470880922}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1602809900
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 2
-    m_TransformParent: {fileID: 833775570}
-    m_Modifications:
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 24.285
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.311
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 6.802
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 712540117036225848, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3216817619400661703, guid: 06c63483157e7104b8da8ad3ee1ab8f1,
-        type: 3}
-      propertyPath: m_Name
-      value: Pipe Ramp 1x5 0.5 Z
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_AddedGameObjects: []
-  m_SourcePrefab: {fileID: 100100000, guid: 06c63483157e7104b8da8ad3ee1ab8f1, type: 3}
 --- !u!1001 &1609776408
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4282,7 +4126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890951645}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20, y: -50, z: 20}
+  m_LocalPosition: {x: 18.1, y: -29.6, z: 20}
   m_LocalScale: {x: 117.284996, y: 1, z: 126.53999}
   m_ConstrainProportionsScale: 0
   m_Children: []
