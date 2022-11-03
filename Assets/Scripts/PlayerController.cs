@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public int id;
 
     public bool isInitialised;
+    public bool isSpeedBoost;
 
     // movement
     public float maxSpeed, acceleration;
@@ -100,9 +101,20 @@ public class PlayerController : MonoBehaviour
 
             direction = Quaternion.Euler(0, -135, 0) * direction;
 
-            if (getPlanarVelocitySqr() < maxSpeedSqr)
+            if(!isSpeedBoost)
             {
-                rb.AddForce(direction * acceleration, ForceMode.Force);
+                if (getPlanarVelocitySqr() < maxSpeedSqr)
+                {
+                    rb.AddForce(direction * acceleration, ForceMode.Force);
+                }
+                
+            }
+            else
+            {
+                if (getPlanarVelocitySqr() < maxSpeedSqr*2)
+                {
+                    rb.AddForce(direction * acceleration*2, ForceMode.Force);
+                }
             }
 
             if (getPlanarVelocitySqr() > maxSpeedSqr)
@@ -110,6 +122,7 @@ public class PlayerController : MonoBehaviour
                 Vector3 planarDir = getPlanarVelocityDirection().normalized;
                 rb.velocity = new Vector3(planarDir.x * maxSpeed, rb.velocity.y, planarDir.z * maxSpeed);
             }
+
         }
     }
 
