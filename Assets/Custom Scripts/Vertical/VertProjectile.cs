@@ -19,7 +19,7 @@ public class VertProjectile : MonoBehaviour
 	{
 		if (other.tag == "Enemy")
 		{
-			Destroy(other.gameObject);
+			other.GetComponent<RedPlagueMover>().TakeDamage(30);
 			Destroy(gameObject);
 		}
 	}

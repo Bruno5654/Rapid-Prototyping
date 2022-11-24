@@ -48,14 +48,14 @@ public class VerticalPlayerController : MonoBehaviour
 		}
 		
 		horizVelocity = Input.GetAxis("Horizontal");
-		vertVelocity = Input.GetAxis("Vertical");
+		//vertVelocity = Input.GetAxis("Vertical");
 	}
 	
 	void FixedUpdate()
 	{
 		myRigidbody.AddForce(horizVelocity * Vector2.right * moveForce);
 
-		myRigidbody.AddForce(vertVelocity * Vector2.up * moveForce);
+		//myRigidbody.AddForce(vertVelocity * Vector2.up * moveForce);
 
 		if (Mathf.Abs(myRigidbody.velocity.sqrMagnitude) > maxSpeed * maxSpeed)
 		{
