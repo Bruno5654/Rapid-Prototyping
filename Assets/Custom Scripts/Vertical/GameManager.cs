@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     private float time;
-    private int score;
-    private int intTime;
+    public int score;
     
     public int enemyScore;
     public GameObject enemySpawner;
+    public TMP_Text scoreText;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +23,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         time = Time.deltaTime;
-        intTime = (int)time;
-        score = intTime + enemyScore;
+        score = (int)time + enemyScore;
+        scoreText.text = score.ToString();
     }
+
+
 }
