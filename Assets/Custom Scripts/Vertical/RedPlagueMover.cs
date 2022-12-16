@@ -8,6 +8,7 @@ public class RedPlagueMover : MonoBehaviour
 	public float maxXOffset;
 	public float health;
 	public Image HealthBar;
+	public GameManager GameManager;
 	protected float origXPos;
 	
 	void Start()
@@ -26,16 +27,18 @@ public class RedPlagueMover : MonoBehaviour
 	{
 		if (other.tag == "Player")
 		{
-			Destroy (other.gameObject);
-		}
+            GameObject.Find("GameManager").GetComponent<GameManager>().endGame = true;
+            Destroy (other.gameObject);
+        }
 	}
 
 	public void TakeDamage(float damage)
     {
 		health -= damage;
         if(health <= 0)
-		{
-			Destroy(gameObject);
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().enemyScore += 3;
+            Destroy(gameObject);
         }
     }
 
