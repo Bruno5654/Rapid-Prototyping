@@ -4,10 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Level
-  - Prop
-  - MenuCamera
-  - MenuLight
+  - Moving Platform
   layers:
   - Default
   - TransparentFX
@@ -18,9 +15,9 @@ TagManager:
   - 
   - 
   - Level
-  - 
-  - 
-  - 
+  - Character
+  - Enemy
+  - Recharge
   - 
   - 
   - 
@@ -44,4 +41,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer
+    uniqueID: 3820135613
     locked: 0

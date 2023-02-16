@@ -3,19 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class KillVolume : MonoBehaviour
-{    
-    protected const string playerTag = "Player";
+{
+    public Transform respawnPoint;
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.tag == playerTag)
+        if (collision.gameObject.tag == "Player")
         {
-            PlayerController playerController = other.GetComponent<PlayerController>();
-
-            playerController.RB.velocity = Vector3.zero;
-            playerController.RB.angularVelocity = Vector3.zero;
-            playerController.isSpeedBoost = false;
-            LevelManager.Instance.setPlayerPosition(playerController);
+            collision.transform.position = respawnPoint.position;
         }
     }
 }
