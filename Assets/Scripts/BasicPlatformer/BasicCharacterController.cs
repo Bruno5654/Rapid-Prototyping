@@ -19,6 +19,9 @@ public class BasicCharacterController : MonoBehaviour
 
     private float horizInput;
     private float vertInput;
+    private float tempJumpPower = 0.0f;
+    private float jumpPower = 0.0f;
+    private float tempY = 0.0f;
 
     public Transform groundedCheckStart;
     public Transform groundedCheckEnd;
@@ -35,20 +38,36 @@ public class BasicCharacterController : MonoBehaviour
     {
         //Get Player input 
         horizInput = Input.GetAxis("Horizontal");
-        vertInput = Input.GetAxis("Vertical");
+        vertInput = Input.GetAxis("Vertical"); 
     }
     
+
     void FixedUpdate()
     {
         //Linecast to our groundcheck gameobject if we hit a layer called "Level" then we're grounded
         grounded = Physics2D.Linecast(groundedCheckStart.position, groundedCheckEnd.position, 1 << LayerMask.NameToLayer("Level"));
         Debug.DrawLine(groundedCheckStart.position, groundedCheckEnd.position, Color.red);
 
-        
+        //Calculate jump power.
+        if (vertInput > 0 && grounded == true)
+        {
+            tempJumpPower += 0.06f;
+            if(tempJumpPower > 1.1f)
+            {
+                tempJumpPower = 1.1f;
+            }
+        }
+
+        if(vertInput == 0 && tempJumpPower > 0)
+        {
+            jumpPower = tempJumpPower;
+            tempJumpPower = 0.0f;
+        }
+
         //Move Character
         rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
 
-        if (vertInput > 0 && grounded == true)
+        if (jumpPower > 0 && grounded == true)
         {
             jumped = true;
             Debug.Log("Should jump");
@@ -56,9 +75,9 @@ public class BasicCharacterController : MonoBehaviour
 
         if (jumped == true)
         {
-            rb.AddForce(new Vector2(0f, jumpForce));
+            rb.AddForce(new Vector2(0f, jumpForce * jumpPower));
             Debug.Log("Jumping!");
-
+            jumpPower = 0.0f;
             jumped = false;
         }
 
