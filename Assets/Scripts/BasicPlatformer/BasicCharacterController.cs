@@ -13,15 +13,17 @@ public class BasicCharacterController : MonoBehaviour
 {
     protected bool facingRight = true;
     protected bool jumped;
+    protected bool dashed;
 
     public float speed = 5.0f;
-    public float jumpForce = 1000;
+    public float jumpForce = 1000.0f;
+    public float dashForce = 10.0f;
 
     private float horizInput;
     private float vertInput;
     private float tempJumpPower = 0.0f;
     private float jumpPower = 0.0f;
-    private float tempY = 0.0f;
+    private bool canDash = true;
 
     public Transform groundedCheckStart;
     public Transform groundedCheckEnd;
@@ -51,7 +53,7 @@ public class BasicCharacterController : MonoBehaviour
         //Calculate jump power.
         if (vertInput > 0 && grounded == true)
         {
-            tempJumpPower += 0.06f;
+            tempJumpPower += 0.03f;
             if(tempJumpPower > 1.1f)
             {
                 tempJumpPower = 1.1f;
@@ -65,8 +67,43 @@ public class BasicCharacterController : MonoBehaviour
         }
 
         //Move Character
-        rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
-
+        if(grounded == false)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
+        }
+        else
+        {
+            canDash = true;
+            rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
+        }
+        
+        
+        //Dash
+        if(horizInput != 0 && canDash == true && grounded == false)
+        {
+            dashed = true;
+            Debug.Log("Should Dash.");
+        }
+        
+        if (dashed == true)
+        {
+            if(horizInput > 0)
+            {
+                dashed = true;
+                Debug.Log("Dashing");
+                rb.AddForce(new Vector2(dashForce, 0.0f));
+                dashed = false;
+            }
+            if (horizInput < 0)
+            {
+                dashed = true;
+                Debug.Log("Dashing");
+                rb.AddForce(new Vector2(-dashForce, 0.0f));
+                dashed = false;
+            }
+        }
+     
+        //Jump
         if (jumpPower > 0 && grounded == true)
         {
             jumped = true;
