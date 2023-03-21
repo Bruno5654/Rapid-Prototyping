@@ -1,14 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
-
-//--------------------------------------------
-/*Basic Character Controller Includes:  
-    - Basic Jumping
-    - Basic grounding with line traces
-    - Basic horizontal movement
- */
-//--------------------------------------------
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class BasicCharacterController : MonoBehaviour
 {
@@ -17,9 +10,13 @@ public class BasicCharacterController : MonoBehaviour
 
     public float speed = 5.0f;
     public float jumpForce = 1000.0f;
-   
+    public float dashForce = 3.0f;
+    public float dashTime = 0.5f;
+    private bool canDash = false;
+    private bool isDash = false;
+    private Vector2 dirDash;
 
-    private float jumpPower = 0.0f;
+
     private float horizInput = 0.0f;
 
     public Transform groundedCheckStart;
@@ -29,10 +26,22 @@ public class BasicCharacterController : MonoBehaviour
     public Rigidbody2D rb;
     public Animator animator;
     public SpriteRenderer spriteRenderer;
+    public TrailRenderer trailRenderer;
+    public GameObject gm;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+  
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Coin")
+        {
+            gm.GetComponent<HandleGame>().coins++;
+            Destroy(other.gameObject);
+        }
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -46,8 +55,7 @@ public class BasicCharacterController : MonoBehaviour
                 Debug.Log("Should jump");
             }
         }
-       
-
+      
         if (jumped == true)
         {
             rb.AddForce(new Vector2(0f, jumpForce));
@@ -56,12 +64,34 @@ public class BasicCharacterController : MonoBehaviour
         }
     }
 
+    public void callDash(InputAction.CallbackContext context)
+    {
+        if(canDash && !grounded)
+        {
+            canDash = false;
+            isDash = true;
+            trailRenderer.emitting = true;
+            StartCoroutine(stopDash());
+        }
+
+        if(isDash)
+        {
+            dirDash = new Vector2(horizInput * speed * Time.fixedDeltaTime, 0.0f);
+        }
+    }
+
+    private IEnumerator stopDash()
+    {
+        yield return new WaitForSeconds(dashTime);
+        isDash = false;
+        trailRenderer.emitting = false;
+    }
+
     public void Move(InputAction.CallbackContext context)
     {
         float inputVector = context.ReadValue<float>();
         horizInput = inputVector;
         animator.SetFloat("Speed", Mathf.Abs(horizInput));
-
     }
 
     void Update()
@@ -74,6 +104,7 @@ public class BasicCharacterController : MonoBehaviour
         {
             spriteRenderer.flipX = true;
         }
+
     }
 
     void FixedUpdate()
@@ -83,16 +114,21 @@ public class BasicCharacterController : MonoBehaviour
         Debug.DrawLine(groundedCheckStart.position, groundedCheckEnd.position, Color.red);
 
         //Move Character
-        if (grounded == false) // If in the air less horizontal control.
+        if (!grounded && isDash) // If in the air and dashing.
         {
-            rb.velocity = new Vector2((horizInput * speed * Time.fixedDeltaTime)/2, rb.velocity.y);
+            rb.velocity = dirDash.normalized * dashForce;
+            animator.SetBool("IsGrounded", false);
+        }
+        else if (!grounded) // If in the air less horizontal control.
+        {
+            rb.velocity = new Vector2((horizInput * speed * Time.fixedDeltaTime) / 2, rb.velocity.y);
             animator.SetBool("IsGrounded", false);
         }
         else
         {
             rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
             animator.SetBool("IsGrounded", true);
-
+            canDash = true;
         }
     }
 }
