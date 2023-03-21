@@ -12,7 +12,6 @@ using UnityEngine.InputSystem;
 
 public class BasicCharacterController : MonoBehaviour
 {
-    protected bool facingRight = true;
     protected bool jumped;
     protected bool dashed;
 
@@ -29,6 +28,7 @@ public class BasicCharacterController : MonoBehaviour
 
     public Rigidbody2D rb;
     public Animator animator;
+    public SpriteRenderer spriteRenderer;
 
     void Awake()
     {
@@ -37,7 +37,6 @@ public class BasicCharacterController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        Debug.Log("Jumping");
 
         if(context.performed)
         {
@@ -67,8 +66,16 @@ public class BasicCharacterController : MonoBehaviour
 
     void Update()
     {
-      
+        if(horizInput > 0.0f)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (horizInput < 0.0f)
+        {
+            spriteRenderer.flipX = true;
+        }
     }
+
     void FixedUpdate()
     {
         //Linecast to our groundcheck gameobject if we hit a layer called "Level" then we're grounded
@@ -76,13 +83,16 @@ public class BasicCharacterController : MonoBehaviour
         Debug.DrawLine(groundedCheckStart.position, groundedCheckEnd.position, Color.red);
 
         //Move Character
-        if (grounded == false)
+        if (grounded == false) // If in the air less horizontal control.
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
+            rb.velocity = new Vector2((horizInput * speed * Time.fixedDeltaTime)/2, rb.velocity.y);
+            animator.SetBool("IsGrounded", false);
         }
         else
         {
             rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
+            animator.SetBool("IsGrounded", true);
+
         }
     }
 }
