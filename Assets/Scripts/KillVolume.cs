@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KillVolume : MonoBehaviour
 {
-    public Transform respawnPoint;
+   
     public GameObject gm;
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -12,7 +12,8 @@ public class KillVolume : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             gm.GetComponent<HandleGame>().coins -= 3;
-            collision.transform.position = respawnPoint.position;
+           // collision.transform.position = respawnPoint.position;
+            collision.GetComponent<BasicCharacterController>().isDead = true;
         }
     }
 }

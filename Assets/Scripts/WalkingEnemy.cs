@@ -19,7 +19,6 @@ public class WalkingEnemy : MonoBehaviour
     float direction;
     
     public float movementSpeed;
-    public Transform respawnPoint;
     public GameObject gm;
 
     void Awake()
@@ -93,7 +92,8 @@ public class WalkingEnemy : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             gm.GetComponent<HandleGame>().coins -= 3;
-            collision.transform.position = respawnPoint.position;
+            //collision.transform.position = respawnPoint.position;
+            collision.GetComponent<BasicCharacterController>().isDead = true;
         }
     }
 
