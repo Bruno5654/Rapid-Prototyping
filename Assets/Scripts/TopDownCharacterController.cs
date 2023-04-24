@@ -11,14 +11,14 @@ public class TopDownCharacterController : MonoBehaviour
     //Reference to attached rigidbody 2D
     private Rigidbody2D rb;
 
+    //Reference to attached sprite renderer.
+    private SpriteRenderer renderer;
+
     private Vector2 playerDirection;
     private Vector2 mousePos;
 
     //The speed at which they're moving
     private float playerSpeed = 1f;
-
-    private bool isSwinging;
-
 
     [Header("Movement parameters")]
     [SerializeField] private float playerMaxSpeed = 100f;
@@ -36,6 +36,9 @@ public class TopDownCharacterController : MonoBehaviour
         //Get the attached components so we can use them later
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        renderer = GetComponent<SpriteRenderer>();
+        renderer.color = CharacterCreation.playerSkinColor;
+        animator.SetInteger("BodyType", CharacterCreation.playerBodyType);
     }
 
     /// <summary>
@@ -55,30 +58,12 @@ public class TopDownCharacterController : MonoBehaviour
 
         mousePos = context.ReadValue<Vector2>();
     }
+
     public void OnPlayerInputShoot(InputAction.CallbackContext context)
     {
         //Not performed? Don't run any other code
         if (!context.performed)
             return;
-
-        if(!isSwinging)
-        {
-            StartCoroutine(SwingMelee());
-        }
-    }
-
-    IEnumerator SwingMelee()
-    {
-        isSwinging = true;
-        meleeWeapon.SetActive(true);
-
-        Vector3 pos = Camera.main.ScreenToViewportPoint(mousePos);
-        Vector2 dir = pos - transform.position;
-
-        meleeWeapon.transform.rotation = Quaternion.LookRotation(Vector3.forward, dir);
-        yield return new WaitForSeconds(1);
-        meleeWeapon.SetActive(false);
-        isSwinging = false;
     }
 
     /// <summary>
