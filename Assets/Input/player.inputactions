@@ -15,9 +15,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Shoot",
+                    "name": "Attack",
                     "type": "Button",
-                    "id": "3878f4d4-2f3b-497b-903d-5d83cfa81a05",
+                    "id": "f98a8531-29c8-4096-a26c-a6556e60ed25",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -26,7 +26,7 @@
                 {
                     "name": "Mouse",
                     "type": "Value",
-                    "id": "955e5208-9743-4db3-b6bb-ac88f6656194",
+                    "id": "d922f884-71b8-42bc-a2c0-22a95ab97e28",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -34,17 +34,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "978bfe49-cc26-4a3d-ab7b-7d7a29327403",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "WASD",
                     "id": "00ca640b-d935-4593-8157-c05846ea39b3",
@@ -146,33 +135,33 @@
                 },
                 {
                     "name": "",
-                    "id": "516cc0da-70b1-4f2a-bf61-8d8c2b380d6d",
-                    "path": "<Gamepad>/buttonSouth",
+                    "id": "6e6cec83-9272-4b82-b415-9eb65ef1eca9",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Shoot",
+                    "groups": "Gamepad",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "ab7e7979-78c7-4838-8bbb-075171e9bf02",
-                    "path": "<Mouse>/leftButton",
+                    "id": "2f240aa3-0b86-4717-8d43-9e8aa56350d9",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Shoot",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "a304c5cf-2c92-4f7f-9caf-515ff6227881",
+                    "id": "12f6b89b-997e-4943-81dd-c9d952329926",
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Mouse",
                     "isComposite": false,
                     "isPartOfComposite": false

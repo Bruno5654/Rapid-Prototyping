@@ -15,18 +15,18 @@ public class TopDownCharacterController : MonoBehaviour
     private SpriteRenderer renderer;
 
     private Vector2 playerDirection;
-    private Vector2 mousePos;
 
     //The speed at which they're moving
     private float playerSpeed = 1f;
 
+    public Vector2 mousePos;
+    public Vector3 worldMousePos;
+    public bool canMove;
+
+    private Camera camera;
+
     [Header("Movement parameters")]
     [SerializeField] private float playerMaxSpeed = 100f;
-
-    [Header("Game data")]
-    [SerializeField] public GameObject meleeWeapon;
-
-
 
     /// <summary>
     /// When the script first initialises
@@ -39,6 +39,8 @@ public class TopDownCharacterController : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         renderer.color = CharacterCreation.playerSkinColor;
         animator.SetInteger("BodyType", CharacterCreation.playerBodyType);
+        camera = Camera.main;
+        canMove = true;
     }
 
     /// <summary>
@@ -48,22 +50,15 @@ public class TopDownCharacterController : MonoBehaviour
     {
         //Set the velocity to the direction they're moving in, multiplied
         //by the speed they're moving
-        rb.velocity = playerDirection * (playerSpeed * playerMaxSpeed) * Time.fixedDeltaTime;
-    }
+        if(canMove)
+        {
+            rb.velocity = playerDirection * (playerSpeed * playerMaxSpeed) * Time.fixedDeltaTime;
+        }
+        else
+        {
+            rb.velocity = playerDirection * 0;
+        }
 
-    public void ReadMouse(InputAction.CallbackContext context)
-    {
-        if (!context.performed)
-            return;
-
-        mousePos = context.ReadValue<Vector2>();
-    }
-
-    public void OnPlayerInputShoot(InputAction.CallbackContext context)
-    {
-        //Not performed? Don't run any other code
-        if (!context.performed)
-            return;
     }
 
     /// <summary>
@@ -88,6 +83,7 @@ public class TopDownCharacterController : MonoBehaviour
         if (!context.performed)
             return;
 
+        Debug.Log("Should move.");
         //Read the direction that the player wants to move, from the
         //keys that have been pressed
         Vector2 direction = context.ReadValue<Vector2>();
@@ -102,5 +98,14 @@ public class TopDownCharacterController : MonoBehaviour
 
         //And set the speed to 1, so they move!
         playerSpeed = 1f;
+    }
+
+    public void ReadMouse(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return;
+        
+        mousePos = context.ReadValue<Vector2>();
+        worldMousePos = camera.ScreenToWorldPoint(mousePos);
     }
 }
