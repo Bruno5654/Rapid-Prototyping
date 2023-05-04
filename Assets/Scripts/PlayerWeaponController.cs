@@ -10,14 +10,16 @@ public class PlayerWeaponController : MonoBehaviour
 {
    
     public int weaponDamage;
-    public int weaponID;
-    
+    public int weaponSpeed;
+    public int weaponType;
+
     public GameObject meleeObject;
     public GameObject _projectile;
 
+    public GameObject currentWeapon;
+
     private float weaponCooldown;
-    private int weaponType;
-    private int weaponSpeed;
+    
     private bool isSwinging;
     private void LaunchProjectile(int m_type, float m_speed)
     {
@@ -43,24 +45,12 @@ public class PlayerWeaponController : MonoBehaviour
     private void FixedUpdate()
     {
         meleeObject.transform.position = transform.position;
-        //Check weapon stats are correct.
-        switch (weaponID)
+
+        if(currentWeapon != null)
         {
-            default: //Basic projectile.
-                weaponDamage = 1;
-                weaponSpeed = 1;
-                weaponType = 2;
-                break;
-            case 1: //Basic projectile.
-                weaponDamage = 1;
-                weaponSpeed = 1;
-                weaponType = 2;
-                break;
-            case 2: //Basic melee.
-                weaponDamage = 1;
-                weaponSpeed = 1;
-                weaponType = 1;
-                break;
+            weaponType = currentWeapon.GetComponent<EquippableWeapon>().weaponType;
+            weaponDamage = currentWeapon.GetComponent<EquippableWeapon>().weaponDamage;
+            weaponSpeed = currentWeapon.GetComponent<EquippableWeapon>().weaponSpeed;
         }
     }
 
@@ -79,7 +69,7 @@ public class PlayerWeaponController : MonoBehaviour
     }
     public void Attack()
     {
-        if(weaponCooldown <= Time.time)
+        if(weaponCooldown <= Time.time && currentWeapon != null)
         {
             weaponCooldown = Time.time + weaponSpeed;
             switch (weaponType)

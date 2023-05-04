@@ -22,6 +22,7 @@ public class TopDownCharacterController : MonoBehaviour
     public Vector2 mousePos;
     public Vector3 worldMousePos;
     public bool canMove;
+    public bool ePressed;
 
     private Camera camera;
 
@@ -42,7 +43,6 @@ public class TopDownCharacterController : MonoBehaviour
         camera = Camera.main;
         canMove = true;
     }
-
     /// <summary>
     /// When a fixed update cycle is called
     /// </summary>
@@ -83,7 +83,6 @@ public class TopDownCharacterController : MonoBehaviour
         if (!context.performed)
             return;
 
-        Debug.Log("Should move.");
         //Read the direction that the player wants to move, from the
         //keys that have been pressed
         Vector2 direction = context.ReadValue<Vector2>();
@@ -91,9 +90,9 @@ public class TopDownCharacterController : MonoBehaviour
         //Set the player's direction to whatever it is
         playerDirection = direction;
 
-        //Set animator parameters
+        /*Set animator parameters
         animator.SetFloat("Horizontal", playerDirection.x);
-        animator.SetFloat("Vertical", playerDirection.y);
+        animator.SetFloat("Vertical", playerDirection.y);*/
         animator.SetFloat("Speed", playerDirection.magnitude);
 
         //And set the speed to 1, so they move!
@@ -107,5 +106,19 @@ public class TopDownCharacterController : MonoBehaviour
         
         mousePos = context.ReadValue<Vector2>();
         worldMousePos = camera.ScreenToWorldPoint(mousePos);
+        animator.SetFloat("Horizontal", worldMousePos.x);
+        animator.SetFloat("Vertical", worldMousePos.y); 
+    }
+
+    public void OnPlayerEInput(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            ePressed = true;
+        }
+        else
+        {
+            ePressed = false;
+        }
     }
 }
