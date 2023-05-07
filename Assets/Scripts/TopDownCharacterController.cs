@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class TopDownCharacterController : MonoBehaviour
 {
@@ -21,10 +23,16 @@ public class TopDownCharacterController : MonoBehaviour
 
     public Vector2 mousePos;
     public Vector3 worldMousePos;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI deathText;
     public bool canMove;
     public bool ePressed;
+    public int hp;
+    public int score;
 
+    public bool isDead;
     private Camera camera;
+    private float scoreRate;
 
     [Header("Movement parameters")]
     [SerializeField] private float playerMaxSpeed = 100f;
@@ -42,6 +50,8 @@ public class TopDownCharacterController : MonoBehaviour
         animator.SetInteger("BodyType", CharacterCreation.playerBodyType);
         camera = Camera.main;
         canMove = true;
+        
+        hp = 5;
     }
     /// <summary>
     /// When a fixed update cycle is called
@@ -50,7 +60,7 @@ public class TopDownCharacterController : MonoBehaviour
     {
         //Set the velocity to the direction they're moving in, multiplied
         //by the speed they're moving
-        if(canMove)
+        if (canMove)
         {
             rb.velocity = playerDirection * (playerSpeed * playerMaxSpeed) * Time.fixedDeltaTime;
         }
@@ -59,15 +69,43 @@ public class TopDownCharacterController : MonoBehaviour
             rb.velocity = playerDirection * 0;
         }
 
+        //Score every second
+        if (scoreRate <= Time.time && !isDead)
+        {
+            scoreRate = Time.time + 1;
+            score++;
+        }
     }
 
+    private void Update()
+    {
+        if(hp <= 0)
+        {
+            isDead = true;
+            renderer.enabled = false;
+            
+        }
+        string scoreString = "Score: " + score.ToString();
+        scoreText.SetText(scoreString);
+
+        if(isDead)
+        {
+            deathText.enabled = true;
+            deathText.gameObject.SetActive(true);
+        }
+        else
+        {
+            deathText.enabled = false ;
+            deathText.gameObject.SetActive(false);
+        }
+    }
     /// <summary>
     /// Called when the player wants to move in a certain direction
     /// </summary>
     /// <param name="context"></param>
     public void OnPlayerInputMove(InputAction.CallbackContext context)
     {
-        if (context.canceled)
+        if (context.canceled || isDead)
         {
             //Was the action just cancelled (released)? If so, set
             //speed to 0
@@ -90,10 +128,10 @@ public class TopDownCharacterController : MonoBehaviour
         //Set the player's direction to whatever it is
         playerDirection = direction;
 
-        /*Set animator parameters
-        animator.SetFloat("Horizontal", playerDirection.x);
-        animator.SetFloat("Vertical", playerDirection.y);*/
+        //Set animator parameters
         animator.SetFloat("Speed", playerDirection.magnitude);
+        animator.SetFloat("Horizontal", playerDirection.x);
+        animator.SetFloat("Vertical", playerDirection.y);
 
         //And set the speed to 1, so they move!
         playerSpeed = 1f;
@@ -101,13 +139,11 @@ public class TopDownCharacterController : MonoBehaviour
 
     public void ReadMouse(InputAction.CallbackContext context)
     {
-        if (!context.performed)
+        if (!context.performed || isDead)
             return;
         
         mousePos = context.ReadValue<Vector2>();
         worldMousePos = camera.ScreenToWorldPoint(mousePos);
-        animator.SetFloat("Horizontal", worldMousePos.x);
-        animator.SetFloat("Vertical", worldMousePos.y); 
     }
 
     public void OnPlayerEInput(InputAction.CallbackContext context)
@@ -120,5 +156,17 @@ public class TopDownCharacterController : MonoBehaviour
         {
             ePressed = false;
         }
+    }
+
+    public void Quit()
+    {
+        if(isDead)
+            Application.Quit();
+    }
+
+    public void Restart()
+    {
+        if(isDead)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

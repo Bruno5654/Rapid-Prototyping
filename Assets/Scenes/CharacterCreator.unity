@@ -3762,6 +3762,18 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2130943084915617136, guid: 4214b57e615806c448ba9d993d629531, type: 3}
+      propertyPath: startingColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130943084915617136, guid: 4214b57e615806c448ba9d993d629531, type: 3}
+      propertyPath: startingColor.g
+      value: 0.5114999
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130943084915617136, guid: 4214b57e615806c448ba9d993d629531, type: 3}
+      propertyPath: startingColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130943084915617136, guid: 4214b57e615806c448ba9d993d629531, type: 3}
       propertyPath: onColorChange.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}

@@ -97,7 +97,7 @@ MonoBehaviour:
   weaponDamage: 1
   weaponSpeed: 1
   weaponType: 1
-  equipped: 0
+  weaponKnockback: 2000
   equipText: {fileID: 0}
   player: {fileID: 0}
   weaponType1: {fileID: 21300000, guid: 05a5c73b9b9647c4ab317d2604a3a1e5, type: 3}

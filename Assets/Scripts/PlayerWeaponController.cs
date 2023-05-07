@@ -12,6 +12,7 @@ public class PlayerWeaponController : MonoBehaviour
     public int weaponDamage;
     public int weaponSpeed;
     public int weaponType;
+    public float weaponKnockback;
 
     public GameObject meleeObject;
     public GameObject _projectile;
@@ -51,6 +52,7 @@ public class PlayerWeaponController : MonoBehaviour
             weaponType = currentWeapon.GetComponent<EquippableWeapon>().weaponType;
             weaponDamage = currentWeapon.GetComponent<EquippableWeapon>().weaponDamage;
             weaponSpeed = currentWeapon.GetComponent<EquippableWeapon>().weaponSpeed;
+            weaponKnockback = currentWeapon.GetComponent<EquippableWeapon>().weaponKnockback;
         }
     }
 
@@ -61,7 +63,7 @@ public class PlayerWeaponController : MonoBehaviour
         isSwinging = true;
         meleeObject.SetActive(true);
         meleeObject.transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePosition - transform.position);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         meleeObject.SetActive(false);
         GetComponent<TopDownCharacterController>().canMove = true;
         yield return new WaitForSeconds(weaponSpeed);
@@ -69,7 +71,7 @@ public class PlayerWeaponController : MonoBehaviour
     }
     public void Attack()
     {
-        if(weaponCooldown <= Time.time && currentWeapon != null)
+        if (weaponCooldown <= Time.time && currentWeapon != null && GetComponent<TopDownCharacterController>().isDead == false)
         {
             weaponCooldown = Time.time + weaponSpeed;
             switch (weaponType)

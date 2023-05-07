@@ -8,6 +8,7 @@ public class EquippableWeapon : MonoBehaviour
     public int weaponDamage;
     public int weaponSpeed;
     public int weaponType;
+    public float weaponKnockback;
 
     public TextMeshProUGUI equipText;
     public GameObject player;
